@@ -13,6 +13,8 @@ public class Player : MonoBehaviour {
     private float minMovingSpeed = 0.1f;
     private bool isRunning = false;
 
+    public CoinManager cm;
+
     private void Awake() {
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
@@ -45,6 +47,13 @@ public class Player : MonoBehaviour {
     public Vector3 GetPlayerPosition() {
         Vector3 playerScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
         return playerScreenPosition;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("Coin")) {
+            Destroy(other.gameObject);
+            cm.coinCount++;
+        }
     }
 }
 
