@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SchoolLobby.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Physics.unity
+    guid: d0e1d7896b5534b4c976ceedc9734331
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
