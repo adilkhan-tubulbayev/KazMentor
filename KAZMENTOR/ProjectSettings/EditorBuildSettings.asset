@@ -17,5 +17,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Physics.unity
     guid: d0e1d7896b5534b4c976ceedc9734331
+  - enabled: 1
+    path: Assets/Scenes/AI Dialogue.unity
+    guid: 69962dd5cc9d765488881e1ab9d005e3
+  - enabled: 1
+    path: Assets/Scenes/Default Dialogue.unity
+    guid: a8e7841f2ae2b6947b945f9c389ea93a
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
