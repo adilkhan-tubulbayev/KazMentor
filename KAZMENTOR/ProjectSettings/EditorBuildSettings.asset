@@ -23,5 +23,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Default Dialogue.unity
     guid: a8e7841f2ae2b6947b945f9c389ea93a
+  - enabled: 1
+    path: Assets/Scenes/Galaxy.unity
+    guid: c4e3445d3cb370248834f9d8516208e5
+  - enabled: 1
+    path: Assets/Scenes/Electronium.unity
+    guid: 2e2eba81577dc3745832201a7ab8b30c
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

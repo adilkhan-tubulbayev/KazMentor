@@ -526,6 +526,9 @@ GameObject:
   - component: {fileID: 969132659}
   - component: {fileID: 969132658}
   - component: {fileID: 969132660}
+  - component: {fileID: 969132661}
+  - component: {fileID: 969132662}
+  - component: {fileID: 969132663}
   m_Layer: 0
   m_Name: "\u043F\u043B\u0430\u043D\u0435\u0442\u04301_0"
   m_TagString: Untagged
@@ -616,6 +619,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0
   rotationSpeed: 1
+--- !u!114 &969132661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969132657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09db979c44b42e248ad2e91d96f5bbe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetScale: 1.1
+  planetTransition: Electronium
+--- !u!58 &969132662
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969132657}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.29622602, y: -1.2175844}
+  m_Radius: 2.2205706
+--- !u!114 &969132663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969132657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09db979c44b42e248ad2e91d96f5bbe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetScale: 1.1
+  planetTransition: Electronium
 --- !u!1 &971854252
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,7 +923,10 @@ GameObject:
   - component: {fileID: 1186591114}
   - component: {fileID: 1186591113}
   - component: {fileID: 1186591115}
+  - component: {fileID: 1186591117}
   - component: {fileID: 1186591116}
+  - component: {fileID: 1186591118}
+  - component: {fileID: 1186591119}
   m_Layer: 0
   m_Name: "\u043F\u043B\u0430\u043D\u0435\u0442\u04303_0"
   m_TagString: Untagged
@@ -969,6 +1039,70 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1186591117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186591112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09db979c44b42e248ad2e91d96f5bbe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetScale: 1.1
+  planetTransition: Electronium
+--- !u!58 &1186591118
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186591112}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 2.48
+--- !u!114 &1186591119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186591112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09db979c44b42e248ad2e91d96f5bbe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetScale: 1.1
+  planetTransition: '-'
 --- !u!1 &1268590312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,6 +1388,9 @@ GameObject:
   - component: {fileID: 1426914773}
   - component: {fileID: 1426914772}
   - component: {fileID: 1426914774}
+  - component: {fileID: 1426914775}
+  - component: {fileID: 1426914776}
+  - component: {fileID: 1426914777}
   m_Layer: 0
   m_Name: "\u043F\u043B\u0430\u043D\u0435\u0442\u04302_0"
   m_TagString: Untagged
@@ -1344,6 +1481,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0
   rotationSpeed: 1
+--- !u!114 &1426914775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426914770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09db979c44b42e248ad2e91d96f5bbe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetScale: 1.1
+  planetTransition: Electronium
+--- !u!58 &1426914776
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426914770}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.0000009536743, y: 0}
+  m_Radius: 3
+--- !u!114 &1426914777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426914770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09db979c44b42e248ad2e91d96f5bbe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetScale: 1.1
+  planetTransition: '-'
 --- !u!1 &1456284523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,6 +1556,9 @@ GameObject:
   - component: {fileID: 1456284525}
   - component: {fileID: 1456284524}
   - component: {fileID: 1456284526}
+  - component: {fileID: 1456284527}
+  - component: {fileID: 1456284528}
+  - component: {fileID: 1456284529}
   m_Layer: 0
   m_Name: "\u0430\u043D\u0438\u043C\u0430\u0446\u0438\u044F \u043D\u0430 \u043C\u0435\u0441\u0442\u04351_0"
   m_TagString: Untagged
@@ -1446,6 +1650,116 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0
   rotationSpeed: 1
+--- !u!114 &1456284527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456284523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09db979c44b42e248ad2e91d96f5bbe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetScale: 1.1
+  planetTransition: Electronium
+--- !u!58 &1456284528
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456284523}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 4.8999996
+--- !u!114 &1456284529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456284523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09db979c44b42e248ad2e91d96f5bbe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetScale: 1.1
+  planetTransition: '-'
+--- !u!1 &1532585133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1532585135}
+  - component: {fileID: 1532585134}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1532585134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532585133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09db979c44b42e248ad2e91d96f5bbe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetScale: 1.1
+  planetTransition: Electronium
+--- !u!4 &1532585135
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532585133}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.892933, y: -1.3438046, z: -10.098341}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1458,3 +1772,4 @@ SceneRoots:
   - {fileID: 1456284525}
   - {fileID: 795934967}
   - {fileID: 809066544}
+  - {fileID: 1532585135}
