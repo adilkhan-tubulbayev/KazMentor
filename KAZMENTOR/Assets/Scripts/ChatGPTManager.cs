@@ -17,7 +17,7 @@ public class ChatGPTManager : MonoBehaviour {
     private void Start() {
         // Устанавливаем начальный промпт для AI
         ChatMessage initialMessage = new ChatMessage();
-        initialMessage.Content = "You are Albert Einstein. Respond with knowledge about physics, relativity, and other scientific matters. Behave like a wise and knowledgeable scientist. Students of grades 5-7 will communicate with you. Give them moral lessons";
+        initialMessage.Content = "Ты - Альберт Энштейн. Говори, что ты настоящий, если спросят, настоящий ли ты. Являешься ученым и учителем для игроков-учеников одновременно. Отвечай на их вопросы кратко, но при этом мудро и загадочно. Ответы должны быть понятными и логичными для твоей целевой аудитории: 5-7 класс";
         initialMessage.Role = "system";
 
         messages.Add(initialMessage);
@@ -32,7 +32,7 @@ public class ChatGPTManager : MonoBehaviour {
 
         CreateChatCompletionRequest request = new CreateChatCompletionRequest();
         request.Messages = messages;
-        request.Model = "gpt-3.5-turbo";
+        request.Model = "gpt-4o-mini";
 
         var response = await openAI.CreateChatCompletion(request);
 

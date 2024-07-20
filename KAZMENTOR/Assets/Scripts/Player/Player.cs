@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-
     public static Player Instance { get; private set; }
 
     [SerializeField] private float movingSpeed = 10f;
@@ -15,13 +14,19 @@ public class Player : MonoBehaviour {
 
     public CoinManager cm;
 
+    public bool isDialogueActive = false; // Новый флаг для блокировки движения
+
     private void Awake() {
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate() {
-        HandleMovement();
+        if (!isDialogueActive) { // Проверка флага
+            HandleMovement();
+        } else {
+            rb.velocity = Vector2.zero; // Останавливаем движение
+        }
     }
 
     private void HandleMovement() {
@@ -56,4 +61,3 @@ public class Player : MonoBehaviour {
         }
     }
 }
-
