@@ -8,9 +8,27 @@ public class Dialogue : MonoBehaviour {
     public string[] lines;
     public float textSpeed;
     public GameObject player; // Ссылка на объект игрока
+    public GameObject puzzle; // Ссылка на объект Puzzle
+    public GameObject dialogueBox; // Ссылка на объект Dialogue Box
+    public GameObject puzzleExitButton; // Ссылка на кнопку выхода из задачи
 
     private int index;
     private Player playerScript; // Ссылка на скрипт управления персонажем
+
+    // Awake is called before Start
+    void Awake() {
+        if (puzzle != null) {
+            puzzle.SetActive(false); // Скрыть Puzzle при старте
+        } else {
+            Debug.LogError("Puzzle is not assigned in the inspector!");
+        }
+
+        if (puzzleExitButton != null) {
+            puzzleExitButton.SetActive(false); // Скрыть кнопку выхода из задачи при старте
+        } else {
+            Debug.LogError("Puzzle Exit Button is not assigned in the inspector!");
+        }
+    }
 
     // Start is called before the first frame update
     void Start() {
@@ -70,6 +88,23 @@ public class Dialogue : MonoBehaviour {
 
     public void ExitDialogue() {
         gameObject.SetActive(false); // Выключить диалоговое окно
+        if (playerScript != null) {
+            playerScript.isDialogueActive = false; // Разблокировать движение персонажа
+        }
+    }
+
+    public void ShowPuzzle() {
+        puzzle.SetActive(true); // Показать Puzzle
+        puzzleExitButton.SetActive(true); // Показать кнопку выхода из задачи
+        dialogueBox.SetActive(false); // Скрыть диалоговое окно
+        if (playerScript != null) {
+            playerScript.isDialogueActive = true; // Заблокировать движение персонажа
+        }
+    }
+
+    public void HidePuzzle() {
+        puzzle.SetActive(false); // Скрыть Puzzle
+        puzzleExitButton.SetActive(false); // Скрыть кнопку выхода из задачи
         if (playerScript != null) {
             playerScript.isDialogueActive = false; // Разблокировать движение персонажа
         }
