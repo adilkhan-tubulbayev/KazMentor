@@ -53,6 +53,10 @@ public class PuzzleManager : MonoBehaviour {
 
     private bool ValidateAnswer(string answer) {
         // Логика для проверки ответа
-        return answer == "правильный_ответ"; // Пример правильного ответа
+        return answer == "14"; // Пример правильного ответа
+    }
+
+    public void ExitResult() {
+        ResultWindow.SetActive(false); // Отключаем окно результата
     }
 }
