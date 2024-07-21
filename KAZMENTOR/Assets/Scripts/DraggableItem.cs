@@ -1,38 +1,64 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
-    private RectTransform rectTransform;
+    private Vector3 startPosition;
+    private Transform originalParent;
     private CanvasGroup canvasGroup;
-    private Canvas canvas;
-    private Vector2 originalLocalPointerPosition;
-    private Vector3 originalPanelLocalPosition;
+    private DropZone currentDropZone;
 
     private void Awake() {
-        rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
-        canvas = GetComponentInParent<Canvas>();
+        GetComponent<Rigidbody2D>().isKinematic = true; // Установка Rigidbody2D в Kinematic
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
-        canvasGroup.alpha = 0.6f;
+        startPosition = transform.position;
+        originalParent = transform.parent;
         canvasGroup.blocksRaycasts = false;
-
-        // Сохранение оригинальной позиции указателя и панели
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform.parent.GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out originalLocalPointerPosition);
-        originalPanelLocalPosition = rectTransform.localPosition;
+        Debug.Log("Начало перетаскивания: " + gameObject.name);
     }
 
     public void OnDrag(PointerEventData eventData) {
-        Vector2 localPointerPosition;
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform.parent.GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out localPointerPosition)) {
-            Vector3 offset = localPointerPosition - originalLocalPointerPosition;
-            rectTransform.localPosition = originalPanelLocalPosition + offset;
-        }
+        transform.position = Input.mousePosition;
+        Debug.Log("Перетаскивание: " + gameObject.name);
     }
 
     public void OnEndDrag(PointerEventData eventData) {
-        canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
+        Debug.Log("Конец перетаскивания: " + gameObject.name);
+
+        if (currentDropZone != null) {
+            if (currentDropZone.HasCorrectItem(this)) {
+                transform.SetParent(currentDropZone.transform);
+                transform.position = currentDropZone.transform.position;
+                Debug.Log($"{gameObject.name} сброшен в правильную зону {currentDropZone.name}");
+            } else {
+                transform.position = startPosition;
+                transform.SetParent(originalParent);
+                Debug.Log($"{gameObject.name} возвращён на исходную позицию (неправильная зона)");
+            }
+        } else {
+            transform.position = startPosition;
+            transform.SetParent(originalParent);
+            Debug.Log($"{gameObject.name} возвращён на исходную позицию (нет зоны)");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        DropZone dropZone = collision.GetComponent<DropZone>();
+        if (dropZone != null) {
+            currentDropZone = dropZone;
+            Debug.Log($"{gameObject.name} вошёл в зону {dropZone.name}");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) {
+        DropZone dropZone = collision.GetComponent<DropZone>();
+        if (dropZone != null && dropZone == currentDropZone) {
+            currentDropZone = null;
+            Debug.Log($"{gameObject.name} покинул зону {dropZone.name}");
+        }
     }
 }

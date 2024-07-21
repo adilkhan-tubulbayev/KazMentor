@@ -106,6 +106,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -113,10 +126,10 @@ TextureImporter:
       name: buttons_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 960
-        width: 157
-        height: 64
+        x: 25
+        y: 962
+        width: 119
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,10 +147,10 @@ TextureImporter:
       name: buttons_1
       rect:
         serializedVersion: 2
-        x: 157
-        y: 960
-        width: 157
-        height: 64
+        x: 193
+        y: 973
+        width: 98
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,10 +168,10 @@ TextureImporter:
       name: buttons_2
       rect:
         serializedVersion: 2
-        x: 314
-        y: 960
-        width: 157
-        height: 64
+        x: 344
+        y: 974
+        width: 98
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,10 +189,10 @@ TextureImporter:
       name: buttons_3
       rect:
         serializedVersion: 2
-        x: 471
-        y: 960
-        width: 157
-        height: 64
+        x: 474
+        y: 965
+        width: 119
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,10 +210,10 @@ TextureImporter:
       name: buttons_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 896
-        width: 157
-        height: 64
+        x: 24
+        y: 900
+        width: 119
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,10 +231,10 @@ TextureImporter:
       name: buttons_5
       rect:
         serializedVersion: 2
-        x: 157
-        y: 896
-        width: 157
-        height: 64
+        x: 185
+        y: 900
+        width: 119
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,10 +252,10 @@ TextureImporter:
       name: buttons_6
       rect:
         serializedVersion: 2
-        x: 314
-        y: 896
-        width: 157
-        height: 64
+        x: 343
+        y: 900
+        width: 119
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,10 +273,10 @@ TextureImporter:
       name: buttons_7
       rect:
         serializedVersion: 2
-        x: 0
-        y: 832
-        width: 157
-        height: 64
+        x: 25
+        y: 835
+        width: 119
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,10 +294,10 @@ TextureImporter:
       name: buttons_8
       rect:
         serializedVersion: 2
-        x: 157
-        y: 832
-        width: 157
-        height: 64
+        x: 176
+        y: 838
+        width: 30
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -302,10 +315,10 @@ TextureImporter:
       name: buttons_9
       rect:
         serializedVersion: 2
-        x: 314
-        y: 832
-        width: 157
-        height: 64
+        x: 208
+        y: 838
+        width: 30
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -323,10 +336,10 @@ TextureImporter:
       name: buttons_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 768
-        width: 157
-        height: 64
+        x: 240
+        y: 838
+        width: 30
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -344,10 +357,10 @@ TextureImporter:
       name: buttons_11
       rect:
         serializedVersion: 2
-        x: 157
-        y: 768
-        width: 157
-        height: 64
+        x: 272
+        y: 838
+        width: 30
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -357,6 +370,90 @@ TextureImporter:
       bones: []
       spriteID: 1094d00b165a0954482e41d38e3bfe12
       internalID: 851983344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttons_12
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 838
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21824e7bc81bfb048892da4c197295bb
+      internalID: -380106241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttons_13
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 838
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ceffa439c599814ebdc530d9bc0e1a9
+      internalID: 1994449932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttons_14
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 775
+        width: 128
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f22e84dc9f295f4e8d74ef77b4cc8ac
+      internalID: -746050093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttons_15
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 775
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f75c371810f7c6f4f85737fec0f84736
+      internalID: -1357180275
       vertices: []
       indices: 
       edges: []
@@ -376,6 +473,10 @@ TextureImporter:
       buttons_1: 350800737
       buttons_10: 2121623849
       buttons_11: 851983344
+      buttons_12: -380106241
+      buttons_13: 1994449932
+      buttons_14: -746050093
+      buttons_15: -1357180275
       buttons_2: -2128153337
       buttons_3: -644764637
       buttons_4: 1828990960
