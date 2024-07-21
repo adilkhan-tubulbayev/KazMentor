@@ -1,14 +1,13 @@
 using UnityEngine;
 
 public class DropZone : MonoBehaviour {
-    public string correctTag; // Tag that indicates the correct item for this zone
     private DraggableItem currentItem;
 
     private void OnTriggerEnter2D(Collider2D collision) {
         DraggableItem item = collision.GetComponent<DraggableItem>();
-        if (item != null && item.CompareTag(correctTag)) {
+        if (item != null) {
             currentItem = item;
-            Debug.Log($"Объект {item.name} вошёл в правильную зону {name}");
+            Debug.Log($"Объект {item.name} вошёл в зону {name}");
         }
     }
 
@@ -20,9 +19,17 @@ public class DropZone : MonoBehaviour {
         }
     }
 
-    public bool HasCorrectItem(DraggableItem item) {
-        bool isCorrectItem = currentItem == item && item.CompareTag(correctTag);
-        Debug.Log($"Проверка {item.name} в зоне {name}: {(isCorrectItem ? "верно" : "неверно")}");
+    public bool HasCorrectItem(string correctTag) {
+        bool isCorrectItem = currentItem != null && currentItem.CompareTag(correctTag);
+        Debug.Log($"Проверка зоны {name}: {(isCorrectItem ? "верно" : "неверно")}");
         return isCorrectItem;
+    }
+
+    public void SetCurrentItem(DraggableItem item) {
+        currentItem = item;
+    }
+
+    public void ClearCurrentItem() {
+        currentItem = null;
     }
 }

@@ -11,6 +11,7 @@ public class Dialogue : MonoBehaviour {
     public GameObject puzzle; // Ссылка на объект Puzzle
     public GameObject dialogueBox; // Ссылка на объект Dialogue Box
     public GameObject puzzleExitButton; // Ссылка на кнопку выхода из задачи
+    public CircuitChecker circuitChecker; // Ссылка на скрипт CircuitChecker
 
     private int index;
     private Player playerScript; // Ссылка на скрипт управления персонажем
@@ -107,6 +108,13 @@ public class Dialogue : MonoBehaviour {
         puzzleExitButton.SetActive(false); // Скрыть кнопку выхода из задачи
         if (playerScript != null) {
             playerScript.isDialogueActive = false; // Разблокировать движение персонажа
+        }
+    }
+
+    public void GlobalExit() {
+        HidePuzzle(); // Скрыть Puzzle
+        if (circuitChecker != null) {
+            circuitChecker.ExitResult(); // Сбросить все перетаскиваемые объекты
         }
     }
 }
