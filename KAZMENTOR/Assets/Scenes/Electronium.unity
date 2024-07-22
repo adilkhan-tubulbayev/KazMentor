@@ -2053,29 +2053,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 373893815}
-  - component: {fileID: 373893814}
   - component: {fileID: 373893816}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: PauseManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &373893814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373893813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d956951134049334085e8be433133402, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinCount: 0
-  coinText: {fileID: 2124559775}
 --- !u!4 &373893815
 Transform:
   m_ObjectHideFlags: 0
@@ -5122,7 +5107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingSpeed: 7
-  cm: {fileID: 373893814}
   isDialogueActive: 0
 --- !u!70 &1091868164
 CapsuleCollider2D:
@@ -7800,8 +7784,8 @@ GameObject:
   - component: {fileID: 2124559776}
   - component: {fileID: 2124559775}
   m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_Name: CoinText
+  m_TagString: CoinText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

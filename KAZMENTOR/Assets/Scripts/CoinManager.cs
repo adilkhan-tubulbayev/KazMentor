@@ -1,23 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class CoinManager : MonoBehaviour
-{
+public class CoinManager : MonoBehaviour {
+    public static CoinManager Instance { get; private set; }
     public int coinCount;
-    public TextMeshProUGUI coinText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Не удалять при смене сцен
+        } else {
+            Destroy(gameObject); // Удалить дублирующийся экземпляр
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        coinText.text = coinCount.ToString();
+    public void AddCoins(int amount) {
+        coinCount += amount;
+        if (CoinTextManager.Instance != null) {
+            CoinTextManager.Instance.UpdateCoinText(coinCount);
+        }
     }
 }

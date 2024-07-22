@@ -12,8 +12,6 @@ public class Player : MonoBehaviour {
     private float minMovingSpeed = 0.1f;
     private bool isRunning = false;
 
-    public CoinManager cm;
-
     public bool isDialogueActive = false; // Новый флаг для блокировки движения
 
     private void Awake() {
@@ -57,7 +55,9 @@ public class Player : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Coin")) {
             Destroy(other.gameObject);
-            cm.coinCount++;
+            if (CoinManager.Instance != null) {
+                CoinManager.Instance.AddCoins(1); // Добавляем коины через метод AddCoins
+            }
         }
     }
 }

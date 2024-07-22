@@ -10,6 +10,7 @@ TagManager:
   - Lamp
   - Resistor_First
   - Resistor_Second
+  - CoinText
   layers:
   - Default
   - TransparentFX
