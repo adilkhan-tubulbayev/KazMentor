@@ -1,23 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
-public class ButtonScale : MonoBehaviour
-{
-
+public class ButtonScale : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     private Vector3 originalScale;
-    [SerializeField] float buttonScale = 1.1f;
+    [SerializeField] private float buttonScale = 1.1f;
 
     private void Start() {
         originalScale = transform.localScale;
     }
 
-    private void OnMouseEnter() {
+    public void OnPointerEnter(PointerEventData eventData) {
         transform.localScale = originalScale * buttonScale;
     }
 
-    private void OnMouseExit() {
+    public void OnPointerExit(PointerEventData eventData) {
         transform.localScale = originalScale;
     }
 }
