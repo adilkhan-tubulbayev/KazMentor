@@ -201,6 +201,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11298911}
   m_CullTransparentMesh: 1
+--- !u!1 &28494613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 28494615}
+  - component: {fileID: 28494614}
+  m_Layer: 0
+  m_Name: BarrierManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &28494614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28494613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2832cf39d3e4ccf43bfd99cd9438abee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barrierAnimator: {fileID: 1608480966}
+  canvases:
+  - {fileID: 731462446}
+  - {fileID: 976932639}
+  - {fileID: 11298911}
+  Player: {fileID: 0}
+--- !u!4 &28494615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28494613}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 826.2334, y: 381.64297, z: -3.9536936}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &30490287
 GameObject:
   m_ObjectHideFlags: 0
@@ -1969,6 +2019,7 @@ MonoBehaviour:
   - Resistor_First
   resultText: {fileID: 1100611043}
   circuitResult: {fileID: 1624971045}
+  barrierController: {fileID: 28494614}
 --- !u!1 &368155479
 GameObject:
   m_ObjectHideFlags: 0
@@ -3767,6 +3818,7 @@ MonoBehaviour:
   ResultText: {fileID: 809740815}
   PuzzleExitButton: {fileID: 204908911}
   Player: {fileID: 1091868162}
+  barrierController: {fileID: 28494614}
 --- !u!1 &731462446
 GameObject:
   m_ObjectHideFlags: 0
@@ -8076,3 +8128,4 @@ SceneRoots:
   - {fileID: 1936400643}
   - {fileID: 397963156}
   - {fileID: 263503967}
+  - {fileID: 28494615}

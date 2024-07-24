@@ -10,8 +10,10 @@ public class PuzzleManager : MonoBehaviour {
     public TMP_Text ResultText; // TMP_Text для текстовых объектов TMP
     public Button PuzzleExitButton;
     public GameObject Player;
+    public BarrierController barrierController; // Добавляем ссылку на BarrierController
 
     private Player playerScript;
+    private bool isPuzzleCorrect = false;
 
     private void Awake() {
         this.gameObject.SetActive(false); // Отключаем канвас в начале игры
@@ -36,13 +38,21 @@ public class PuzzleManager : MonoBehaviour {
 
     public void CheckAnswer() {
         string answer = AnswerInputField.text;
-        bool isCorrect = ValidateAnswer(answer);
+        isPuzzleCorrect = ValidateAnswer(answer);
 
         ResultWindow.SetActive(true);
-        ResultText.text = isCorrect ? "Верно!" : "Неверно!";
+        ResultText.text = isPuzzleCorrect ? "Верно!" : "Неверно!";
+
+        if (barrierController != null) {
+            barrierController.SetTextCorrect(isPuzzleCorrect);
+        }
     }
 
     public void ExitPuzzle() {
+        if (isPuzzleCorrect) {
+            barrierController.SetTextCorrect(true);
+        }
+
         this.gameObject.SetActive(false); // Отключаем канвас
         ResultWindow.SetActive(false); // Отключаем окно результата
         ResultText.text = ""; // Очистка текста результата при выходе

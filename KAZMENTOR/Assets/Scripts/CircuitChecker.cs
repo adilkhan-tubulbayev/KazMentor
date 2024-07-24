@@ -6,6 +6,8 @@ public class CircuitChecker : MonoBehaviour {
     public string[] correctTags; // Массив правильных тегов для зон сброса
     public TextMeshProUGUI resultText; // Текст для отображения результата
     public GameObject circuitResult; // Объект для отображения результата
+    public BarrierController barrierController; // Добавляем ссылку на BarrierController
+
     private Vector3[] initialPositions; // Исходные позиции перетаскиваемых объектов
     private DraggableItem[] draggableItems; // Перетаскиваемые объекты
     private bool isCircuitCorrect = false; // Флаг для отслеживания правильности схемы
@@ -47,6 +49,14 @@ public class CircuitChecker : MonoBehaviour {
         }
 
         circuitResult.SetActive(true); // Показать результат
+
+        if (barrierController != null) {
+            barrierController.SetCircuitCorrect(isCorrect);
+        }
+    }
+
+    public bool IsCircuitCorrect() {
+        return isCircuitCorrect;
     }
 
     public void ExitResult() {
@@ -55,6 +65,10 @@ public class CircuitChecker : MonoBehaviour {
         // Возвращаем перетаскиваемые объекты на их исходные позиции только если схема неверна
         if (!isCircuitCorrect) {
             ResetDraggableItems();
+        }
+
+        if (isCircuitCorrect) {
+            barrierController.SetCircuitCorrect(true);
         }
     }
 
