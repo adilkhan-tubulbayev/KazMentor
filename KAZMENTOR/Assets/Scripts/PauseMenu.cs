@@ -28,23 +28,29 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void PauseGame() {
+        AudioManager.Instance.PlayButtonSound();
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
     }
 
     public void ResumeGame() {
+        AudioManager.Instance.PlayButtonSound();
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }
 
     public void GoToMainMenu() {
+        AudioManager.Instance.StopAudioClip(AudioManager.Instance.outside);
+        AudioManager.Instance.StopAudioClip(AudioManager.Instance.universeMelody);
+        AudioManager.Instance.PlayButtonSound();
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame() {
+        AudioManager.Instance.PlayButtonSound();
         Application.Quit();
     }
 }

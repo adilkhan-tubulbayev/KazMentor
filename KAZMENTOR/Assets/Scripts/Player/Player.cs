@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Добавляем пространство имён для работы со сценами
 
 public class Player : MonoBehaviour {
     public static Player Instance { get; private set; }
@@ -14,6 +15,8 @@ public class Player : MonoBehaviour {
 
     public bool isDialogueActive = false; // Новый флаг для блокировки движения
 
+    private bool isPlayingSound = false; // Флаг для отслеживания состояния звука
+
     private void Awake() {
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
@@ -24,6 +27,8 @@ public class Player : MonoBehaviour {
             HandleMovement();
         } else {
             rb.velocity = Vector2.zero; // Останавливаем движение
+            isRunning = false;
+            StopWalkingSound(); // Останавливаем звук при остановке
         }
     }
 
@@ -38,8 +43,37 @@ public class Player : MonoBehaviour {
 
         if (Mathf.Abs(inputVector.x) > minMovingSpeed || Mathf.Abs(inputVector.y) > minMovingSpeed) {
             isRunning = true;
+            PlayWalkingSound();
         } else {
             isRunning = false;
+            StopWalkingSound();
+        }
+    }
+
+    private void PlayWalkingSound() {
+        if (!isPlayingSound) { // Проверяем, не воспроизводится ли уже звук
+            isPlayingSound = true;
+
+            // Получаем активную сцену
+            Scene currentScene = SceneManager.GetActiveScene();
+            string sceneName = currentScene.name;
+
+            // В зависимости от имени сцены воспроизводим соответствующий звук
+            if (sceneName == "SchoolOutside" || sceneName == "Electronium") {
+                AudioManager.Instance.PlayGroundWalkingSound();
+            } else if (sceneName == "SchoolLobby" || sceneName == "Physics") {
+                AudioManager.Instance.PlayFloorWalkingSound();
+            }
+        }
+    }
+
+    private void StopWalkingSound() {
+        if (isPlayingSound) {
+            isPlayingSound = false;
+
+            // Останавливаем оба звука, чтобы избежать их наложения
+            AudioManager.Instance.StopAudioClip(AudioManager.Instance.floorWalking);
+            AudioManager.Instance.StopAudioClip(AudioManager.Instance.groundWalking);
         }
     }
 
@@ -59,5 +93,23 @@ public class Player : MonoBehaviour {
                 CoinManager.Instance.AddCoins(1); // Добавляем коины через метод AddCoins
             }
         }
+    }
+
+    // Метод вызывается при загрузке новой сцены
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        if (CoinManager.Instance != null) {
+            CoinManager.Instance.ResetSceneCoins(); // Сбрасываем монеты текущей сцены
+            CoinTextManager.Instance.UpdateCoinText(CoinManager.totalCoins); // Обновляем текст
+        }
+    }
+
+    // Подписываемся на событие загрузки сцены при активации объекта
+    private void OnEnable() {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    // Отписываемся от события загрузки сцены при деактивации объекта
+    private void OnDisable() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

@@ -16008,6 +16008,50 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 31.96875, y: 4.9816437}
   m_EdgeRadius: 0
+--- !u!1 &856679165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 856679167}
+  - component: {fileID: 856679166}
+  m_Layer: 0
+  m_Name: OutsideSoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &856679166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856679165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc6ee2c87be13fd458bc4e1feaa8c440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &856679167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856679165}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.050614, y: -3.3210347, z: -10.021594}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &876593087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18352,3 +18396,4 @@ SceneRoots:
   - {fileID: 1845401088}
   - {fileID: 1117931569}
   - {fileID: 1863918208}
+  - {fileID: 856679167}

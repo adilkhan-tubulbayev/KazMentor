@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class CoinManager : MonoBehaviour {
     public static CoinManager Instance { get; private set; }
-    public int coinCount;
+    private int currentSceneCoins = 0; // Монеты, собранные на текущей сцене
+
+    public static int totalCoins = 0; // Общий счет монет, который сохраняется между сценами
 
     private void Awake() {
         if (Instance == null) {
@@ -14,9 +16,23 @@ public class CoinManager : MonoBehaviour {
     }
 
     public void AddCoins(int amount) {
-        coinCount += amount;
+        currentSceneCoins += amount;
+        totalCoins += amount;
+
+        // Воспроизводим звук сбора монеты
+        AudioManager.Instance.PlayCoinSound();
+
+        // Обновляем текст с количеством монет
         if (CoinTextManager.Instance != null) {
-            CoinTextManager.Instance.UpdateCoinText(coinCount);
+            CoinTextManager.Instance.UpdateCoinText(totalCoins);
         }
+    }
+
+    public void ResetSceneCoins() {
+        currentSceneCoins = 0;
+    }
+
+    public void SaveSceneCoins() {
+        totalCoins += currentSceneCoins;
     }
 }

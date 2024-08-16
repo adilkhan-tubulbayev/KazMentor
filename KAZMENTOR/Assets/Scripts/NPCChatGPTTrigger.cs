@@ -23,7 +23,12 @@ public class NPCChatGPTTrigger : MonoBehaviour {
 
     void Update() {
         if (playerInRange && Input.GetKeyDown(KeyCode.C)) {
-            ToggleDialogue();
+            OpenDialogue();
+        }
+
+        // Проверка нажатия клавиши выхода, например Escape
+        if (canvasAI.activeInHierarchy && Input.GetKeyDown(KeyCode.Escape)) {
+            ExitDialogue();
         }
     }
 
@@ -41,17 +46,15 @@ public class NPCChatGPTTrigger : MonoBehaviour {
         }
     }
 
-    public void ToggleDialogue() {
+    public void OpenDialogue() {
         if (!canvasAI.activeInHierarchy) {
             canvasAI.SetActive(true); // Включить диалоговое окно
             player.isDialogueActive = true; // Заблокировать движение персонажа
-        } else {
-            canvasAI.SetActive(false); // Выключить диалоговое окно
-            player.isDialogueActive = false; // Разблокировать движение персонажа
         }
     }
 
     public void ExitDialogue() {
+        AudioManager.Instance.PlayButtonSound();
         canvasAI.SetActive(false); // Выключить диалоговое окно
         player.isDialogueActive = false; // Разблокировать движение персонажа
     }

@@ -25,6 +25,7 @@ public class CircuitChecker : MonoBehaviour {
     }
 
     public void CheckCircuit() {
+        AudioManager.Instance.PlayButtonSound();
         bool isCorrect = true;
 
         // Проверка каждой зоны сброса
@@ -60,6 +61,7 @@ public class CircuitChecker : MonoBehaviour {
     }
 
     public void ExitResult() {
+        AudioManager.Instance.PlayButtonSound();
         circuitResult.SetActive(false); // Отключаем окно результата
 
         // Возвращаем перетаскиваемые объекты на их исходные позиции только если схема неверна

@@ -30,6 +30,7 @@ public class PuzzleManager : MonoBehaviour {
     }
 
     public void ShowPuzzle() {
+        AudioManager.Instance.PlayButtonSound();
         this.gameObject.SetActive(true); // Включаем канвас
         if (playerScript != null) {
             playerScript.isDialogueActive = true; // Заблокировать движение персонажа
@@ -37,6 +38,7 @@ public class PuzzleManager : MonoBehaviour {
     }
 
     public void CheckAnswer() {
+        AudioManager.Instance.PlayButtonSound();
         string answer = AnswerInputField.text;
         isPuzzleCorrect = ValidateAnswer(answer);
 
@@ -49,6 +51,7 @@ public class PuzzleManager : MonoBehaviour {
     }
 
     public void ExitPuzzle() {
+        AudioManager.Instance.PlayButtonSound();
         if (isPuzzleCorrect) {
             barrierController.SetTextCorrect(true);
         }
@@ -67,6 +70,7 @@ public class PuzzleManager : MonoBehaviour {
     }
 
     public void ExitResult() {
+        AudioManager.Instance.PlayButtonSound();
         ResultWindow.SetActive(false); // Отключаем окно результата
     }
 }

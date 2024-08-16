@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class Dialogue : MonoBehaviour {
     public TextMeshProUGUI textComponent;
     public string[] lines;
-    public float textSpeed;
+    public float textSpeed = 0.02f;
     public GameObject player; // Ссылка на объект игрока
     public GameObject puzzle; // Ссылка на объект Puzzle
     public GameObject dialogueBox; // Ссылка на объект Dialogue Box
@@ -55,6 +54,7 @@ public class Dialogue : MonoBehaviour {
     }
 
     public void StartDialogue() {
+        StopAllCoroutines(); // Остановить любые предыдущие корутины
         index = 0;
         StartCoroutine(TypeLine());
         if (playerScript != null) {
@@ -64,9 +64,20 @@ public class Dialogue : MonoBehaviour {
 
     IEnumerator TypeLine() {
         textComponent.text = string.Empty; // Очистка текста перед началом новой линии
-        foreach (char c in lines[index].ToCharArray()) {
-            textComponent.text += c;
-            yield return new WaitForSeconds(textSpeed);
+
+        // Даем фрейм для обновления UI
+        yield return new WaitForEndOfFrame();
+
+        string[] words = lines[index].Split(' ');
+
+        foreach (string word in words) {
+            foreach (char c in word.ToCharArray()) {
+                textComponent.text += c;
+                yield return new WaitForSeconds(textSpeed); // Пауза между символами
+            }
+            textComponent.text += ' '; // Добавить пробел после слова
+            AudioManager.Instance.PlayTalkSound(); // Воспроизведение звука для каждого слова
+            yield return new WaitForSeconds(textSpeed); // Небольшая пауза после слова
         }
     }
 
@@ -83,11 +94,13 @@ public class Dialogue : MonoBehaviour {
     }
 
     public void ResetDialogue() {
+        StopAllCoroutines(); // Остановить любые предыдущие корутины
         index = 0; // Сброс индекса на начало
         StartDialogue(); // Перезапуск диалога
     }
 
     public void ExitDialogue() {
+        AudioManager.Instance.PlayButtonSound();
         gameObject.SetActive(false); // Выключить диалоговое окно
         if (playerScript != null) {
             playerScript.isDialogueActive = false; // Разблокировать движение персонажа
@@ -95,6 +108,7 @@ public class Dialogue : MonoBehaviour {
     }
 
     public void ShowPuzzle() {
+        AudioManager.Instance.PlayButtonSound();
         puzzle.SetActive(true); // Показать Puzzle
         puzzleExitButton.SetActive(true); // Показать кнопку выхода из задачи
         dialogueBox.SetActive(false); // Скрыть диалоговое окно
@@ -104,6 +118,7 @@ public class Dialogue : MonoBehaviour {
     }
 
     public void HidePuzzle() {
+        AudioManager.Instance.PlayButtonSound();
         puzzle.SetActive(false); // Скрыть Puzzle
         puzzleExitButton.SetActive(false); // Скрыть кнопку выхода из задачи
         if (playerScript != null) {

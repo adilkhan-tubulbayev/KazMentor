@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public class ChatGPTManager : MonoBehaviour {
     public TextMeshProUGUI textComponent;
     public OnResponseEvent OnResponse;
-    public float textSpeed = 0.05f; // Скорость отображения текста
+    public float textSpeed = 0.02f; // Скорость отображения текста
 
     [System.Serializable]
     public class OnResponseEvent : UnityEvent<string> { }
@@ -49,9 +49,16 @@ public class ChatGPTManager : MonoBehaviour {
 
     private IEnumerator TypeText(string text) {
         textComponent.text = string.Empty; // Очистка текста перед началом новой линии
-        foreach (char c in text.ToCharArray()) {
-            textComponent.text += c;
-            yield return new WaitForSeconds(textSpeed); // Пауза между символами
+        string[] words = text.Split(' ');
+
+        foreach (string word in words) {
+            foreach (char c in word.ToCharArray()) {
+                textComponent.text += c;
+                yield return new WaitForSeconds(textSpeed); // Пауза между символами
+            }
+            textComponent.text += ' '; // Добавить пробел после слова
+            AudioManager.Instance.PlayTalkSound(); // Воспроизведение звука для каждого слова
+            yield return new WaitForSeconds(textSpeed); // Небольшая пауза после слова
         }
 
         OnResponse.Invoke(text);
