@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
-{
+public class MainMenu : MonoBehaviour {
+    public CameraTransition cameraTransition; // Ссылка на компонент для зумирования камеры
+
     public void PlayGame() {
         AudioManager.Instance.PlayButtonSound();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        cameraTransition.StartTransitionWithFade(); // Запуск анимации с затемнением
     }
 
     public void QuitGame() {
