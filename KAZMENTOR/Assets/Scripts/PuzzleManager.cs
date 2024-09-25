@@ -56,6 +56,11 @@ public class PuzzleManager : MonoBehaviour {
             barrierController.SetTextCorrect(true);
         }
 
+
+        // Воспроизведение звука отключения электрического поля при выходе из головоломки
+        AudioManager.Instance.PlayElectricFieldOffSound();
+
+
         this.gameObject.SetActive(false); // Отключаем канвас
         ResultWindow.SetActive(false); // Отключаем окно результата
         ResultText.text = ""; // Очистка текста результата при выходе

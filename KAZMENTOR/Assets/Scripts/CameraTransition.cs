@@ -58,6 +58,9 @@ public class CameraTransition : MonoBehaviour {
         timeElapsed = 0f;
         initialPosition = Camera.main.transform.position; // «апоминаем начальную позицию камеры
         initialOrthographicSize = Camera.main.orthographicSize; // «апоминаем начальный размер камеры
+
+        // ¬оспроизведение звука перехода
+        AudioManager.Instance.PlayTransitionSound();
     }
 
     IEnumerator LoadNextScene() {

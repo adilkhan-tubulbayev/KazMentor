@@ -15,6 +15,11 @@ public class AudioManager : MonoBehaviour {
     public AudioSource coin;
     public AudioSource outside;
 
+    public AudioSource transition;
+
+    public AudioSource electricFieldOn;
+    public AudioSource electricFieldOff;
+
     private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -58,6 +63,18 @@ public class AudioManager : MonoBehaviour {
 
     public void PlayOutsideSound() {
         PlayAudioClip(outside);
+    }
+
+    public void PlayTransitionSound() {
+        PlayAudioClip(transition);
+    }
+
+    public void PlayElectricFieldOnSound() {
+        PlayAudioClip(electricFieldOn);
+    }
+
+    public void PlayElectricFieldOffSound() {
+        PlayAudioClip(electricFieldOff);
     }
 
     private void PlayAudioClip(AudioSource audioClip) {

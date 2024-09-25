@@ -33,6 +33,7 @@ public class BarrierController : MonoBehaviour {
         if (isCircuitCorrect && isTextCorrect) {
             if (barrierAnimator != null && barrierAnimator.HasParameter("BarrierOff")) {
                 barrierAnimator.SetTrigger("BarrierOff"); // Запуск анимации BarrierOff
+                AudioManager.Instance.PlayElectricFieldOffSound(); // Активация аудио electricFieldOff
             } else {
                 Debug.LogError("Аниматор не настроен правильно или параметр BarrierOff отсутствует.");
             }
