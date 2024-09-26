@@ -2,38 +2,36 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class DraggableMetal : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
-    private Canvas canvas;                // Reference to the Canvas
+    private Canvas canvas;                // Ссылка на Canvas для UI
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
-    private Vector2 originalPosition;     // Original position of the metal
-    private Transform originalParent;     // Original parent of the metal
+    private Vector2 originalPosition;     // Оригинальная позиция металла
+    private Transform originalParent;     // Оригинальный родитель объекта
 
     [HideInInspector]
-    public Scale currentScale;            // Reference to the Scale if the metal is on it
+    public Scale currentScale;            // Ссылка на объект весов, на которых находится металл
 
     private void Awake() {
-        rectTransform = GetComponent<RectTransform>();   // Get the RectTransform
-        canvasGroup = GetComponent<CanvasGroup>();       // Get the CanvasGroup
-        canvas = GetComponentInParent<Canvas>();         // Get the Canvas
+        rectTransform = GetComponent<RectTransform>();   // Получаем RectTransform
+        canvasGroup = GetComponent<CanvasGroup>();       // Получаем CanvasGroup
+        canvas = GetComponentInParent<Canvas>();         // Получаем Canvas
 
-        originalPosition = rectTransform.anchoredPosition;   // Store the original position
-        originalParent = transform.parent;                   // Store the original parent
+        originalPosition = rectTransform.anchoredPosition;   // Запоминаем оригинальную позицию
+        originalParent = transform.parent;                   // Запоминаем оригинального родителя
     }
 
-    // Called when the drag operation starts
     public void OnBeginDrag(PointerEventData eventData) {
-        canvasGroup.blocksRaycasts = false;  // Disable raycasts so that drop zones can detect the metal
+        canvasGroup.blocksRaycasts = false;  // Отключаем взаимодействие с raycasts, пока объект перетаскивается
 
         if (currentScale != null) {
-            // Inform the scale that the metal is being removed
+            // Если металл был на весах, сбрасываем массу и отсоединяем от весов
             currentScale.ClearMass();
             currentScale = null;
         }
     }
 
-    // Called during the drag operation
     public void OnDrag(PointerEventData eventData) {
-        // Move the metal object with the mouse
+        // Перемещаем объект вместе с мышью
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvas.transform as RectTransform,
@@ -45,24 +43,21 @@ public class DraggableMetal : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     }
 
     public void OnEndDrag(PointerEventData eventData) {
-        canvasGroup.blocksRaycasts = true;  // Включаем снова raycasts
+        canvasGroup.blocksRaycasts = true;  // Включаем обратно raycasts
 
-        // Проверяем, был ли объект сброшен на весы
+        // Проверяем, был ли металл сброшен на весы
         if (eventData.pointerEnter != null) {
             Scale scale = eventData.pointerEnter.GetComponent<Scale>();
             if (scale != null) {
-                // Устанавливаем позицию металла точно над весами
-                rectTransform.anchoredPosition = scale.GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 145); // Смещаем вверх на 145 единиц
+                // Фиксируем металл на весах
+                rectTransform.anchoredPosition = scale.GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 50); // Смещаем вверх
 
-                currentScale = scale;  // Устанавливаем ссылку на текущие весы
+                currentScale = scale;  // Привязываем металл к весам
                 scale.DisplayMass(this);  // Отображаем массу
                 return;
             }
         }
 
-        // Если объект не сброшен на весы, оставляем его в текущей позиции
+        // Если объект не был сброшен на весы, возвращаем его в текущую позицию
     }
-
-
-
 }

@@ -1,63 +1,41 @@
 using UnityEngine;
-using TMPro;                      // For TextMeshProUGUI
+using TMPro;                      // Для работы с TextMeshPro
 using UnityEngine.EventSystems;
 
 public class Scale : MonoBehaviour, IDropHandler {
-    public TextMeshProUGUI massText;       // Text to display the mass
+    public TextMeshProUGUI massText;       // Текст для отображения массы
 
-    private DraggableMetal currentMetal;  // The metal currently on the scale
+    private DraggableMetal currentMetal;  // Металл, который находится на весах
 
-    // Method to display the mass
+    // Метод для отображения массы
     public void DisplayMass(DraggableMetal metal) {
         currentMetal = metal;
 
-        float mass = 0f;
+        // Проверяем массу металла, используя его скрипт свойств (MetalProperties)
+        MetalProperties metalProperties = metal.GetComponent<MetalProperties>();
 
-        // Attempt to get the mass from the metal's properties
-        // Assuming you have scripts like CopperProperties, AluminumProperties, etc.
-        // attached to your metal objects that contain a 'mass' variable
-
-        MonoBehaviour[] metalProperties = metal.GetComponents<MonoBehaviour>();
-
-        foreach (MonoBehaviour prop in metalProperties) {
-            if (prop is CopperProperties copper) {
-                mass = copper.mass;
-                break;
-            } else if (prop is AluminumProperties aluminum) {
-                mass = aluminum.mass;
-                break;
-            } else if (prop is PlumbumProperties plumbum) {
-                mass = plumbum.mass;
-                break;
-            }
-        }
-
-        if (mass > 0f) {
-            massText.text = "Mass: " + mass.ToString("F2") + " kg";
+        if (metalProperties != null) {
+            massText.text = "Mass: " + metalProperties.mass.ToString("F2") + " kg";
         } else {
             massText.text = "Mass: unknown";
         }
     }
 
-    // Method to clear the mass display (reset to zero)
+    // Метод для сброса массы (обнуление)
     public void ClearMass() {
         massText.text = "Mass: 0 kg";
         currentMetal = null;
     }
 
-    // Called when an object is dropped onto the scale
+    // Обрабатываем сброс объекта на весы
     public void OnDrop(PointerEventData eventData) {
         DraggableMetal metal = eventData.pointerDrag.GetComponent<DraggableMetal>();
         if (metal != null) {
-            // Фиксируем позицию металла точно над весами
-            metal.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 50); // Смещаем вверх на 50 единиц
+            // Фиксируем металл на весах
+            metal.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 50); // Смещаем вверх
 
-            // Устанавливаем текущие весы для металла
-            metal.currentScale = this;
-            DisplayMass(metal);
+            metal.currentScale = this;  // Привязываем весы к металлу
+            DisplayMass(metal);  // Отображаем массу
         }
     }
-
-
-
 }
