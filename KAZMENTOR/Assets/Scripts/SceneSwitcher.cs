@@ -7,6 +7,13 @@ public class SceneSwitcher : MonoBehaviour {
     public void SwitchScene() {
         AudioManager.Instance.PlayButtonSound();
         if (sceneNumber >= 0 && sceneNumber < SceneManager.sceneCountInBuildSettings) {
+            if (sceneNumber == 3) {
+                AudioManager.Instance.StopAudioClip(AudioManager.Instance.universeMelody);
+            }
+
+            else if (sceneNumber == 6) {
+                AudioManager.Instance.StopAudioClip(AudioManager.Instance.outside);
+            }
             SceneManager.LoadScene(sceneNumber);
         } else {
             Debug.LogError("—цена с указанным номером не существует в Build Settings.");

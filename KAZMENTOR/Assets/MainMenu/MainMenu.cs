@@ -12,4 +12,9 @@ public class MainMenu : MonoBehaviour {
         AudioManager.Instance.PlayButtonSound();
         Application.Quit();
     }
+
+    public void LaboratoryGame() {
+        AudioManager.Instance.PlayButtonSound();
+        cameraTransition.StartTransitionWithFade(); // Запуск анимации с затемнением
+    }
 }
