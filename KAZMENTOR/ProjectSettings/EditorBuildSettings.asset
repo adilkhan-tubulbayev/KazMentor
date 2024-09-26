@@ -29,5 +29,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Electronium.unity
     guid: bafaa8ffc41624b4092982a1d76e6428
+  - enabled: 1
+    path: Assets/Scenes/Laboratory.unity
+    guid: 6e8fa9324845a6d40b898bfcc9723d0a
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

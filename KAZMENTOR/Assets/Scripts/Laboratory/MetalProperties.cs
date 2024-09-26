@@ -1,56 +1,77 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;  // Для работы с Image
 
 public class MetalProperties : MonoBehaviour {
     public float mass = 1f; // Масса металла (в кг)
-    public float specificHeat = 0.5f; // Удельная теплоёмкость (уменьшена для быстрого нагрева)
+    public float specificHeat = 0.5f; // Удельная теплоёмкость
     public float currentTemperature = 20f; // Начальная температура (в °C)
+    public float maxTemperature = 200f;  // Максимальная температура
+    public Color normalColor = Color.gray; // Цвет при комнатной температуре
+    public Color heatedColor = Color.red;  // Цвет при максимальной температуре
 
-    // Цвет металла при комнатной температуре
-    public Color normalColor = Color.gray;
-
-    // Цвет металла при нагреве
-    public Color heatedColor = Color.red;
-
-    // Максимальная температура для данного металла
-    public float maxTemperature = 200f;
-
-    private SpriteRenderer spriteRenderer;  // Компонент для изменения цвета спрайта
+    private Image image; // Используем Image для изменения цвета
+    private bool isHeating = false;
+    private float heatingDuration = 20f; // Время для нагрева до красного цвета
 
     private void Awake() {
-        // Пытаемся получить компонент SpriteRenderer
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
-        // Если спрайтрендера нет — выводим ошибку в консоль
-        if (spriteRenderer == null) {
-            Debug.LogError("Отсутствует компонент SpriteRenderer на объекте " + gameObject.name);
-        } else {
-            spriteRenderer.color = normalColor; // Устанавливаем начальный цвет металла
+        image = GetComponent<Image>();  // Получаем компонент Image для изменения цвета
+        if (image == null) {
+            Debug.LogError("Отсутствует компонент Image на объекте " + gameObject.name);
         }
     }
 
+    private void Update() {
+        if (currentTemperature > 20f && !isHeating) {
+            CoolDown(1f);  // Охлаждение металла
+        }
+    }
+
+    // Метод для обновления температуры и запуска нагрева
     public void UpdateTemperature(float energy) {
-        // Увеличение температуры
-        float deltaTemperature = energy / (mass * specificHeat);
-        currentTemperature += deltaTemperature;
+        if (!isHeating) {
+            StartCoroutine(HeatOverTime(energy));
+        }
+    }
 
-        // Ограничиваем максимальную температуру
-        currentTemperature = Mathf.Clamp(currentTemperature, 20f, maxTemperature);
+    private IEnumerator HeatOverTime(float energy) {
+        isHeating = true;
+        float startTime = Time.time;
+        float startTemperature = currentTemperature;
+        float targetTemperature = maxTemperature;
+        float duration = heatingDuration;
 
-        // Обновление цвета в зависимости от температуры
+        while (Time.time < startTime + duration) {
+            float elapsed = Time.time - startTime;
+            float percentageComplete = elapsed / duration;
+
+            // Увеличение температуры
+            currentTemperature = Mathf.Lerp(startTemperature, targetTemperature, percentageComplete);
+
+            // Обновляем цвет, не изменяя прозрачность (alpha)
+            UpdateColor();
+
+            yield return null;
+        }
+
+        currentTemperature = maxTemperature;
         UpdateColor();
+        isHeating = false;
     }
 
     private void UpdateColor() {
-        // Если есть SpriteRenderer, изменяем цвет в зависимости от температуры
-        if (spriteRenderer != null) {
+        if (image != null) {
             float temperatureRatio = Mathf.Clamp01(currentTemperature / maxTemperature);
-            spriteRenderer.color = Color.Lerp(normalColor, heatedColor, temperatureRatio);
+
+            // Сохраняем исходное значение альфа-канала (прозрачности)
+            Color newColor = Color.Lerp(normalColor, heatedColor, temperatureRatio);
+            newColor.a = image.color.a; // Сохраняем текущую прозрачность
+            image.color = newColor;
         }
     }
 
     public void CoolDown(float coolingRate) {
-        // Постепенное охлаждение
-        currentTemperature = Mathf.Max(currentTemperature - coolingRate * Time.deltaTime, 20f);  // Минимум 20°C
+        currentTemperature = Mathf.Max(currentTemperature - coolingRate * Time.deltaTime, 20f);
         UpdateColor();  // Обновляем цвет в процессе охлаждения
     }
 }

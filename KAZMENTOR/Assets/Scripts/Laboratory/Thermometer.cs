@@ -7,51 +7,54 @@ public class Thermometer : MonoBehaviour {
     public RectTransform redBar; // Ссылка на красную полоску (RectTransform)
     public TextMeshProUGUI temperatureText; // Текстовое поле для отображения температуры
     public Button measureButton; // Кнопка измерения температуры
+    public HeaterController heater; // Ссылка на нагреватель
 
     private float roomTemperature = 0f; // Начальная комнатная температура
-    private float targetTemperature; // Целевая температура (комнатная температура 20-25°C)
-    private float maxTemperature = 50f; // Максимальная температура для термометра
-    private float animationSpeed = 0.5f; // Скорость анимации подъёма полоски
-
-    private float maxHeight = 200f; // Максимальная высота красной полоски (настрой под свой термометр)
-    private float minHeight = 0f;   // Минимальная высота полоски (для 0 градусов)
-
-    private bool isMeasuring = false; // Флаг, чтобы не запускать анимацию несколько раз
+    private float targetTemperature; // Целевая температура
+    private float maxTemperature = 200f; // Максимальная температура для термометра
+    private float minHeight = 0f;   // Минимальная высота полоски
+    private float maxHeight = 200f; // Максимальная высота красной полоски
+    private bool isMeasuring = false;
 
     void Start() {
-        // Привязываем событие к кнопке "Measure Temperature"
-        measureButton.onClick.AddListener(MeasureRoomTemperature);
+        measureButton.onClick.AddListener(MeasureTemperature);
         UpdateTemperatureDisplay(roomTemperature);
     }
 
-    // Метод, который запускается при нажатии кнопки "Измерить температуру"
-    public void MeasureRoomTemperature() {
+    public void MeasureTemperature() {
         if (!isMeasuring) {
-            targetTemperature = Random.Range(20f, 25f); // Генерация комнатной температуры в пределах 20-25°C
+            // Если нагреватель включен — нагреваем до 200°C
+            if (heater.isHeating) {
+                targetTemperature = Random.Range(160f, 200f);
+            } else {
+                targetTemperature = Random.Range(20f, 25f); // Комнатная температура
+            }
+
             StartCoroutine(AnimateTemperature(targetTemperature));
         }
     }
 
-    // Анимация увеличения полоски до целевого значения температуры
-    IEnumerator AnimateTemperature(float targetTemp) {
-        isMeasuring = true; // Устанавливаем флаг, чтобы нельзя было повторно нажать кнопку во время анимации
-        while (roomTemperature < targetTemp) {
-            roomTemperature += Time.deltaTime * animationSpeed; // Плавно увеличиваем температуру
-            UpdateTemperatureDisplay(roomTemperature); // Обновляем отображение температуры
-            yield return null; // Ждём до следующего кадра
+    private IEnumerator AnimateTemperature(float targetTemp) {
+        isMeasuring = true;
+        float startTemp = roomTemperature;
+        float elapsedTime = 0f;
+        float duration = 20f;  // Задаем длительность нагрева
+
+        while (elapsedTime < duration) {
+            elapsedTime += Time.deltaTime;
+            roomTemperature = Mathf.Lerp(startTemp, targetTemp, elapsedTime / duration);
+            UpdateTemperatureDisplay(roomTemperature);
+            yield return null;
         }
-        roomTemperature = targetTemp; // Зафиксировать точное значение после завершения анимации
+
+        roomTemperature = targetTemp;
         UpdateTemperatureDisplay(roomTemperature);
-        isMeasuring = false; // Снимаем флаг после завершения анимации
+        isMeasuring = false;
     }
 
-    // Обновление отображения температуры и полоски
-    private void UpdateTemperatureDisplay(float temperature) {
-        // Обновляем текст
+    public void UpdateTemperatureDisplay(float temperature) {
         temperatureText.text = temperature.ToString("F1") + " °C";
-
-        // Рассчитываем высоту красной полоски относительно текущей температуры
         float newHeight = Mathf.Lerp(minHeight, maxHeight, temperature / maxTemperature);
-        redBar.sizeDelta = new Vector2(redBar.sizeDelta.x, newHeight); // Меняем только высоту полоски
+        redBar.sizeDelta = new Vector2(redBar.sizeDelta.x, newHeight);
     }
 }

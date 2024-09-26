@@ -50,7 +50,7 @@ public class DraggableMetal : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
             Scale scale = eventData.pointerEnter.GetComponent<Scale>();
             if (scale != null) {
                 // Фиксируем металл на весах
-                rectTransform.anchoredPosition = scale.GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 50); // Смещаем вверх
+                rectTransform.anchoredPosition = scale.GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 145); // Смещаем вверх
 
                 currentScale = scale;  // Привязываем металл к весам
                 scale.DisplayMass(this);  // Отображаем массу

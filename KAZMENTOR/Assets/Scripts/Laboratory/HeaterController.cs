@@ -1,30 +1,45 @@
 using UnityEngine;
 
 public class HeaterController : MonoBehaviour {
-    public float heatingRange = 1.5f;  // Радиус действия нагревателя
-    public float heatingPower = 100f;  // Мощность нагревателя
-    public bool isHeating = false;     // Флаг, активен ли нагреватель
-    public Animator heaterAnimator;    // Ссылка на аниматор нагревателя
+    public Animator heaterAnimator;  // Ссылка на анимацию нагревателя
+    public float heatingPower = 5f;  // Мощность нагрева
+    public bool isHeating = false;   // Флаг активности нагревателя
+    private MetalProperties currentMetal = null; // Текущий металл в зоне нагрева
 
-    private void Update() {
-        if (isHeating) {
-            // Проверяем все объекты с MetalProperties в радиусе действия нагревателя
-            MetalProperties[] metals = FindObjectsOfType<MetalProperties>();
-            foreach (MetalProperties metal in metals) {
-                if (Vector3.Distance(transform.position, metal.transform.position) <= heatingRange) {
-                    metal.UpdateTemperature(heatingPower * Time.deltaTime);  // Нагреваем металл
-                }
-            }
+    // Срабатывает, когда металл попадает в зону нагрева
+    private void OnTriggerEnter2D(Collider2D other) {
+        MetalProperties metal = other.GetComponent<MetalProperties>();
+        if (metal != null && currentMetal == null) {
+            // Если нет текущего металла, устанавливаем его
+            currentMetal = metal;
+        }
+    }
+
+    // Срабатывает, пока металл находится в зоне нагрева
+    private void OnTriggerStay2D(Collider2D other) {
+        MetalProperties metal = other.GetComponent<MetalProperties>();
+        if (metal != null && metal == currentMetal && isHeating) {
+            // Нагреваем только текущий металл
+            currentMetal.UpdateTemperature(heatingPower * Time.deltaTime);
+        }
+    }
+
+    // Срабатывает, когда металл выходит из зоны нагрева
+    private void OnTriggerExit2D(Collider2D other) {
+        MetalProperties metal = other.GetComponent<MetalProperties>();
+        if (metal != null && metal == currentMetal) {
+            // Если текущий металл покинул зону нагрева, сбрасываем его
+            currentMetal = null;
         }
     }
 
     public void StartHeating() {
         isHeating = true;
-        heaterAnimator.SetBool("IsHeating", true);  // Включаем анимацию нагрева
+        heaterAnimator.SetBool("IsHeating", true);  // Включаем анимацию
     }
 
     public void StopHeating() {
         isHeating = false;
-        heaterAnimator.SetBool("IsHeating", false);  // Выключаем анимацию нагрева
+        heaterAnimator.SetBool("IsHeating", false);  // Отключаем анимацию
     }
 }
