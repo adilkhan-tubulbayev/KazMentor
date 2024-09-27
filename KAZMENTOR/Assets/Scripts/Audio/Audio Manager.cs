@@ -20,6 +20,10 @@ public class AudioManager : MonoBehaviour {
     public AudioSource electricFieldOn;
     public AudioSource electricFieldOff;
 
+    public AudioSource laboratoryVibe;
+    public AudioSource laboratoryInterface;
+    public AudioSource heating;
+
     private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -75,6 +79,18 @@ public class AudioManager : MonoBehaviour {
 
     public void PlayElectricFieldOffSound() {
         PlayAudioClip(electricFieldOff);
+    }
+
+    public void PlayLaboratoryVibeSound() {
+        PlayAudioClip(laboratoryVibe);
+    }
+
+    public void PlayLaboratoryInterfaceSound() {
+        PlayAudioClip(laboratoryInterface);
+    }
+
+    public void PlayHeatingSound() {
+        PlayAudioClip(heating);
     }
 
     private void PlayAudioClip(AudioSource audioClip) {
