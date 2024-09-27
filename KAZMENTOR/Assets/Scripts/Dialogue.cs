@@ -101,6 +101,7 @@ public class Dialogue : MonoBehaviour {
 
     public void ExitDialogue() {
         AudioManager.Instance.PlayButtonSound();
+        AudioManager.Instance.StopAudioClip(AudioManager.Instance.dialogue);
         gameObject.SetActive(false); // Выключить диалоговое окно
         if (playerScript != null) {
             playerScript.isDialogueActive = false; // Разблокировать движение персонажа

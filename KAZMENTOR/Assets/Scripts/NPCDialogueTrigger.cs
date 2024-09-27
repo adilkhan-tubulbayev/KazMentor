@@ -21,6 +21,7 @@ public class NPCDialogueTrigger : MonoBehaviour {
     void Update() {
         if (playerInRange && Input.GetKeyDown(KeyCode.X)) {
             if (!dialogueCanvas.activeSelf) {
+                AudioManager.Instance.PlayDialogueSound();
                 dialogueCanvas.SetActive(true); // јктивировать диалоговое окно
             }
             dialogueScript.ResetDialogue(); // —брос и перезапуск диалога

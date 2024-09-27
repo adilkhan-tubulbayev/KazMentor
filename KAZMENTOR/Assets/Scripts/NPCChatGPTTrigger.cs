@@ -49,12 +49,14 @@ public class NPCChatGPTTrigger : MonoBehaviour {
     public void OpenDialogue() {
         if (!canvasAI.activeInHierarchy) {
             canvasAI.SetActive(true); // Включить диалоговое окно
+            AudioManager.Instance.PlayDialogueSound();
             player.isDialogueActive = true; // Заблокировать движение персонажа
         }
     }
 
     public void ExitDialogue() {
         AudioManager.Instance.PlayButtonSound();
+        AudioManager.Instance.StopAudioClip(AudioManager.Instance.dialogue);
         canvasAI.SetActive(false); // Выключить диалоговое окно
         player.isDialogueActive = false; // Разблокировать движение персонажа
     }
