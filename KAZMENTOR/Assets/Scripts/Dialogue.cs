@@ -100,8 +100,8 @@ public class Dialogue : MonoBehaviour {
     }
 
     public void ExitDialogue() {
-        AudioManager.Instance.PlayButtonSound();
         AudioManager.Instance.StopAudioClip(AudioManager.Instance.dialogue);
+        AudioManager.Instance.PlayButtonSound();
         gameObject.SetActive(false); // Выключить диалоговое окно
         if (playerScript != null) {
             playerScript.isDialogueActive = false; // Разблокировать движение персонажа
@@ -113,6 +113,7 @@ public class Dialogue : MonoBehaviour {
         puzzle.SetActive(true); // Показать Puzzle
         puzzleExitButton.SetActive(true); // Показать кнопку выхода из задачи
         dialogueBox.SetActive(false); // Скрыть диалоговое окно
+        AudioManager.Instance.StopAudioClip(AudioManager.Instance.dialogue);
         if (playerScript != null) {
             playerScript.isDialogueActive = true; // Заблокировать движение персонажа
         }

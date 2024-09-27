@@ -14,6 +14,7 @@ public class SceneSwitcher : MonoBehaviour {
 
             else if (sceneNumber == 6) {
                 AudioManager.Instance.StopAudioClip(AudioManager.Instance.outside);
+                AudioManager.Instance.StopAudioClip(AudioManager.Instance.dialogue);
             }
 
             SceneManager.LoadScene(sceneNumber);
