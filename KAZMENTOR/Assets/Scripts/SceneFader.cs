@@ -7,9 +7,21 @@ public class SceneFader : MonoBehaviour {
     public Image fadeImage;
     public float fadeSpeed = 1.5f;
 
+    private static SceneFader instance;
+
+    void Awake() {
+        if (instance == null) {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        } else {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     void Start() {
-        StartCoroutine(FadeOut());
         fadeImage.raycastTarget = false;
+        StartCoroutine(FadeOut());
     }
 
     public void FadeToScene(string sceneName) {
@@ -23,7 +35,15 @@ public class SceneFader : MonoBehaviour {
             progress += fadeSpeed * Time.deltaTime;
             yield return null;
         }
+
+        // Ensure the fadeImage persists
+        DontDestroyOnLoad(fadeImage.transform.parent.gameObject);
+
         SceneManager.LoadScene(sceneName);
+
+        // Wait for the scene to load before starting FadeOut
+        yield return new WaitForSeconds(0.1f);
+
         StartCoroutine(FadeOut());
     }
 
@@ -35,6 +55,4 @@ public class SceneFader : MonoBehaviour {
             yield return null;
         }
     }
-
-
 }
